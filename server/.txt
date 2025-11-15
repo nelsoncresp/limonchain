@@ -1,0 +1,64 @@
+{
+  "contrato": {
+    "id": 1,
+    "estado": "PENDIENTE_ANALISIS",
+    "lote_id": 1,
+    "agricultor_id": 1,
+    "comprador_id": 2,
+    "cantidad": 10,
+    "precio_unitario": 2500,
+    "fecha_entrega": "2025-12-01"
+  }
+}
+{
+  "email": "analista@limonchain.com",
+  "password": "123456"
+}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiQ09NUFJBRE9SIiwiaWF0IjoxNzYzMTQ3OTQyLCJleHAiOjE3NjMxNzY3NDJ9.RZflJrC_uSBTfbeS6CrxREKkMy3WZ7rTbiDUk-3dOc4
+{
+  "user": {
+    "id": 4,
+    "nombre": "Laura Analista",
+    "email": "analista@limonchain.com",
+    "password_hash": "$2b$10$97MUjPUdZEMpZBNDTiK89.npNYxSvcrvlCJm6yhtsPWConlGWUN7K",
+    "telefono": "3001112233",
+    "rol": "ANALISTA",
+    "wallet_publica": null,
+    "estado": 1,
+    "fecha_creacion": "2025-11-14T19:42:59.000Z"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sIjoiQU5BTElTVEEiLCJpYXQiOjE3NjMxNTIyODYsImV4cCI6MTc2MzE4MTA4Nn0.Wt7QkMOnrUYMnxlQGgeM6uDbRz7be37DNc3YwBRqlQw"
+}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiQ09NUFJBRE9SIiwiaWF0IjoxNzYzMTUyNTAzLCJleHAiOjE3NjMxODEzMDN9.9y1J186G7q-Df3ZOdNFtFTidlJ9Gj6gI2G_dFx--Wfg
+
+{
+  "nombre": "Nelson",
+  "email": "nels@comprador.com",
+  "password": "123456",
+  "telefono": "3009876543",
+  "rol": "COMPRADOR"
+}
+{
+  "user": {
+    "id": 5,
+    "nombre": "Nelson",
+    "email": "nels@comprador.com",
+    "password_hash": "$2b$10$rdOxTKAlmIjpmwrjuh4X2uq3cO94EMz6DRPHgLY7Kqsy2PhhSkLnW",
+    "telefono": "3009876543",
+    "rol": "COMPRADOR",
+    "wallet_publica": null,
+    "estado": 1,
+    "fecha_creacion": "2025-11-14T21:00:23.000Z"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sIjoiQ09NUFJBRE9SIiwiaWF0IjoxNzYzMTU0MDY5LCJleHAiOjE3NjMxODI4Njl9.QYr6dzLJvwcnLelLV4t-8d6xkJBZXu2lwx6IjqdvhPs"
+}
+
+
+
+
+
+
+
+
+
+
