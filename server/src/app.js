@@ -12,7 +12,7 @@ import adminRoutes from './routes/admin.routes.js'
 import transporteRoutes from './routes/transporte.routes.js';
 
 import notificacionesRoutes from './routes/notificaciones.routes.js';
-
+import trazabilidadRoutes from './routes/trazabilidad.routes.js'
 
 import { testConnection } from './config/db.js';
 import authRoutes from './routes/auth.routes.js';
@@ -38,10 +38,11 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use("/api/lotes", lotesRoutes);
 app.use("/api/contratos", contratosRoutes);
-app.use("/api/analisis-contratos", analisisRoutes);
+app.use("/api/analisis", analisisRoutes);
 app.use("/api/blockchain", blockchainRoutes);
 app.use("/api/transporte", transporteRoutes);
 app.use("/api/notificaciones", notificacionesRoutes);
+app.use("/api/trazabilidad", trazabilidadRoutes)
 
 // Healthcheck
 app.get('/health', (req, res) => res.json({ ok: true }));

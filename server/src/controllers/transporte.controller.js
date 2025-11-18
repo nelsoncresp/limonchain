@@ -1,6 +1,7 @@
 import { TransporteModel } from '../models/transporte.model.js';
 import { ContratosModel } from '../models/contratos.model.js';
 import { LotesModel } from '../models/lotes.model.js';
+import { pool } from "../config/db.js";
 
 export const TransporteController = {
 

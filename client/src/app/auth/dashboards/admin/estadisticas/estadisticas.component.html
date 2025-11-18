@@ -1,0 +1,142 @@
+<div class="p-6 space-y-8">
+
+    <!-- ============================== -->
+    <!-- MÉTRICAS PRINCIPALES -->
+    <!-- ============================== -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+  
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-xl shadow">
+        <p class="text-gray-500 text-sm">Usuarios Totales</p>
+        <h2 class="text-3xl font-bold">{{ totalUsuarios }}</h2>
+      </div>
+  
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-xl shadow">
+        <p class="text-gray-500 text-sm">Contratos Totales</p>
+        <h2 class="text-3xl font-bold">{{ totalContratos }}</h2>
+      </div>
+  
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-xl shadow">
+        <p class="text-gray-500 text-sm">Lotes Totales</p>
+        <h2 class="text-3xl font-bold">{{ totalLotes }}</h2>
+      </div>
+  
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-xl shadow">
+        <p class="text-gray-500 text-sm">Bloques Blockchain</p>
+        <h2 class="text-3xl font-bold">{{ totalBloques }}</h2>
+      </div>
+  
+    </div>
+  
+    <!-- ============================== -->
+    <!-- GRÁFICO DE CONTRATOS -->
+    <!-- ============================== -->
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+      <h3 class="text-xl font-bold mb-4">Estados de Contratos</h3>
+  
+      <apx-chart
+        [series]="chartContratos.series"
+        [chart]="chartContratos.chart"
+        [xaxis]="chartContratos.xaxis"
+        [title]="chartContratos.title"
+        [dataLabels]="chartContratos.dataLabels">
+      </apx-chart>
+    </div>
+  
+    <!-- ============================== -->
+    <!-- DETALLE DE ACTIVIDAD -->
+    <!-- ============================== -->
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+      <h3 class="text-xl font-bold mb-4">Última Actividad del Sistema</h3>
+  
+      <table class="w-full text-left">
+        <thead class="text-gray-600 dark:text-gray-300 text-sm border-b">
+          <tr>
+            <th class="py-2">Fecha</th>
+            <th>Total de movimientos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of actividad">
+            <td class="py-2">{{ item.fecha }}</td>
+            <td>{{ item.total }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- ============================== -->
+    <!-- DETALLE DE LOTES -->
+    <!-- ============================== -->
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+      <h3 class="text-xl font-bold mb-4">Detalle de Lotes</h3>
+  
+      <table class="w-full text-left">
+        <thead class="text-gray-600 dark:text-gray-300 text-sm border-b">
+          <tr>
+            <th class="py-2">Estado</th>
+            <th>Cantidad</th>
+            <th>Peso Total (kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let lote of lotesDetallados">
+            <td class="py-2">{{ lote.estado }}</td>
+            <td>{{ lote.total }}</td>
+            <td>{{ lote.peso_total }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- ============================== -->
+    <!-- CONTRATOS DETALLADOS -->
+    <!-- ============================== -->
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+      <h3 class="text-xl font-bold mb-4">Contratos Recientes</h3>
+  
+      <table class="w-full text-left">
+        <thead class="text-gray-600 dark:text-gray-300 text-sm border-b">
+          <tr>
+            <th class="py-2">ID</th>
+            <th>Estado</th>
+            <th>Agricultor</th>
+            <th>Comprador</th>
+            <th>Lote</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of contratosDetallados">
+            <td class="py-2">{{ c.id }}</td>
+            <td>{{ c.estado }}</td>
+            <td>{{ c.agricultor }}</td>
+            <td>{{ c.comprador }}</td>
+            <td>{{ c.lote }}</td>
+            <td>{{ c.fecha_creacion | date:'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- ============================== -->
+    <!-- BLOQUES DE BLOCKCHAIN -->
+    <!-- ============================== -->
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+      <h3 class="text-xl font-bold mb-4">Últimos 20 Bloques Blockchain</h3>
+  
+      <div class="space-y-4">
+        <div
+          *ngFor="let block of bloques"
+          class="p-4 border rounded-lg bg-gray-50 dark:bg-gray-700 dark:text-gray-200"
+        >
+          <p><strong>ID:</strong> {{ block.id }}</p>
+          <p><strong>Hash:</strong> {{ block.hash }}</p>
+          <p><strong>Previo:</strong> {{ block.previous_hash }}</p>
+          <p><strong>Contratos:</strong> {{ block.total_contratos }}</p>
+          <p><strong>Fecha:</strong> {{ block.timestamp }}</p>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  

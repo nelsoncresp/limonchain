@@ -1,0 +1,324 @@
+
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #54a74d; 
+    font-family: 'Poppins', sans-serif; 
+}
+
+
+.pagina-login-contenedor {
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    max-width: 1370px; 
+    background-color: #ffffff; 
+    border-radius: 20px; 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); 
+    overflow: hidden; 
+    min-height: 600px; 
+    margin: 40px 0; 
+}
+
+.navbar-limonchain {
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff; 
+    border-bottom: 1px solid #f0f0f0; 
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    box-sizing: border-box; 
+    flex-shrink: 0;
+}
+.logo-formulario-container {
+    margin: 0 auto 20px auto; 
+    
+    width: 80px; 
+    height: 80px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e9f5e9; 
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); 
+}
+
+.logo-svg-container-nav {
+    width: 90px; 
+    height: 90px; 
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px; 
+    padding: 7px; 
+}
+.logo-limonchain-nav {
+    width: 100%;
+    height: 100%;
+    stroke: #5D9C59; 
+    fill: none;
+}
+
+.nombre-app {
+    font-size: 1.5rem; 
+    font-weight: 800;
+    color: #5D9C59; 
+}
+
+.contenedor-columnas {
+    flex: 1; 
+    display: flex;
+}
+
+.columna-info-organica {
+    flex: 1; 
+    background: linear-gradient(135deg, #5D9C59 0%, #76B947 100%); 
+    color: white;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem; 
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 0 20px; 
+}
+
+@media (max-width: 900px) {
+    .columna-info-organica {
+        display: none; 
+    }
+}
+
+.contenido-info-organica {
+    max-width: 450px; 
+    text-align: left;
+    padding: 30px; 
+    background-color: rgba(0, 0, 0, 0.25); 
+    border-radius: 12px; 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(5px); 
+    border: 1px solid rgba(255, 255, 255, 0.4); 
+}
+
+.titulo-bienvenida {
+    font-size: 2.5rem; 
+    font-weight: 900; 
+    margin-bottom: 1rem;
+    color: #FFD93D; 
+    line-height: 1.1;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.subtitulo-info {
+    font-size: 1.15rem; 
+    line-height: 1.6; 
+    margin-bottom: 2.5rem; 
+    color: #ffffff; 
+    opacity: 0.98; 
+    font-weight: 400; 
+}
+
+.caracteristicas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 3rem;
+}
+
+.caracteristica-item {
+    display: flex;
+    align-items: flex-start;  
+    gap: 15px; 
+}
+
+.icono-caracteristica {
+    width: 30px; 
+    height: 30px;
+    color: #FFD93D; 
+    flex-shrink: 0; 
+    margin-top: 2px;  
+}
+
+.caracteristica-item p {
+    font-size: 1.05rem; 
+    margin: 0;
+    color: #ffffff; 
+    line-height: 1.5;
+    font-weight: 300; 
+}
+.caracteristica-item p strong {
+    font-weight: 600; 
+    color: #FFD93D; 
+}
+
+.claim-final-organica {
+    margin-top: 3.5rem;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #FFD93D;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    padding-top: 18px; 
+    text-align: center; 
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.columna-login-organica {
+    flex: 1; 
+    background-color: white; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem; 
+    border-radius: 0 0 20px 0; 
+}
+
+@media (min-width: 900px) {
+    .columna-login-organica {
+        width: 55%; 
+        flex: none;
+    }
+}
+
+.card-login-organica {
+    width: 100%;
+    max-width: 380px; 
+    padding: 0;  
+    border-radius: 12px;
+    box-shadow: none; 
+}
+
+.header-login {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.titulo-login {
+    color: #333333; 
+    font-weight: 700; 
+    font-size: 1.6rem;
+    margin-bottom: 0.2rem;
+}
+
+.subtitulo-login {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+
+.formulario-login {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.campo-grupo { width: 100%; }
+
+.input-contenedor {
+    display: flex;
+    align-items: center;
+    border: 1px solid #d1d5db; 
+    padding: 0.85rem 1rem; 
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out; 
+}
+
+.input-contenedor:focus-within {
+    border-color: #5D9C59; 
+    box-shadow: 0 0 0 2px rgba(93, 156, 89, 0.3);
+}
+
+.icono-input {
+    height: 1.2rem; 
+    width: 1.2rem;
+    color: #9ca3af; 
+    flex-shrink: 0;
+    margin-right: 8px;  }
+
+
+.input-contenedor input {
+    border: none;
+    outline: none;
+    padding: 0;  
+    width: 100%;
+    font-size: 1rem;
+    color: #333333;
+    font-weight: 500;
+    background-color: transparent; 
+}
+
+
+.olvide-password { 
+    text-align: right; 
+    margin-top: -8px;  
+}
+.olvide-password span {
+    font-size: 0.8rem;  
+    font-weight: 500;
+    color: #9ca3af;  
+    cursor: pointer;
+}
+.olvide-password span:hover { text-decoration: underline; color: #5D9C59; }
+
+.btn-login {
+    display: block;
+    width: 100%;
+    background-color: #FFD93D; 
+    color: #333333; 
+    padding: 1rem 0; 
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;  
+    letter-spacing: 0.05em; 
+    transition: background-color 0.3s, transform 0.1s;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 217, 61, 0.6);
+    line-height: 1; }
+
+.btn-login:hover { background-color: #facc15; transform: translateY(-1px); }
+.btn-login:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #ffe685;
+    box-shadow: none;
+    transform: translateY(0);
+}
+
+.mensaje-error {
+    color: #ef4444; 
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 5px;
+    padding-left: 5px;
+    text-align: left;
+}
+.alerta-error {
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+    background-color: #fee2e2;
+    border: 1px solid #f87171;
+    border-radius: 8px;
+    color: #b91c1c;
+    font-weight: bold;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+
+.enlace-registro {
+    margin-top: 2rem; 
+    text-align: center;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+.enlace-registro a {
+    color: #5D9C59; 
+    font-weight: bold;
+    text-decoration: none;
+}
+.enlace-registro a:hover { text-decoration: underline; }

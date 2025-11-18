@@ -77,7 +77,8 @@ export const ContratosModel = {
     obtenerTodos: async () => {
         const [rows] = await pool.query(
             `SELECT c.*, l.nombre as lote_nombre, 
-                    a.nombre as agricultor_nombre, comp.nombre as comprador_nombre
+                    a.nombre as agricultor_nombre, 
+                    comp.nombre as comprador_nombre
              FROM contratos c
              JOIN lotes l ON c.lote_id = l.id
              JOIN users a ON c.agricultor_id = a.id
@@ -86,6 +87,7 @@ export const ContratosModel = {
         );
         return rows;
     },
+    
 
     obtenerPendientesAnalisis: async () => {
         const [rows] = await pool.query(
@@ -99,6 +101,31 @@ export const ContratosModel = {
              ORDER BY c.fecha_creacion DESC`
         );
         return rows;
-    }
+    },
+     getByComprador: async (req, res) => {
+        try {
+            const { compradorId } = req.params;
+            
+            console.log('🔍 Obteniendo contratos para comprador:', compradorId);
+            
+            // Verificar autorización
+            if (req.user.rol !== "ADMIN" && parseInt(req.user.id) !== parseInt(compradorId)) {
+                return res.status(403).json({ error: "No autorizado para ver estos contratos" });
+            }
+
+            const contratos = await ContratosModel.obtenerPorComprador(compradorId);
+            
+            res.json(contratos);
+
+        } catch (error) {
+            console.error('❌ Error obteniendo contratos por comprador:', error);
+            res.status(500).json({ 
+                error: "Error al obtener contratos",
+                details: error.message 
+            });
+        }
+    },
+
+    // ... 
 
 };

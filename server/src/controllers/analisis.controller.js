@@ -115,6 +115,15 @@ export const AnalisisController = {
             console.error(err);
             res.status(500).json({ error: "Error al rechazar contrato" });
         }
-    }
-
+    },
+    todos: async (req, res) => {
+        try {
+          const contratos = await ContratosModel.obtenerTodos();
+          res.json({ contratos });
+        } catch (err) {
+          console.error(err);
+          res.status(500).json({ error: "Error obteniendo contratos" });
+        }
+      },      
+      
 };

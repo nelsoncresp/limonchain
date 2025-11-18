@@ -1,0 +1,124 @@
+<div class="pagina-login-contenedor">
+
+  <nav class="navbar-limonchain">
+    <div class="logo-svg-container-nav ">
+      <img src="../../../assets/logosvg.svg" alt="logo">
+    </div>
+    <span class="nombre-app">LimonChain</span>
+  </nav>
+
+  <div class="contenedor-columnas">
+
+    <div class="columna-info-organica">
+      <div class="contenido-info-organica">
+        <h1 class="titulo-bienvenida">Bienvenido a LimonChain.</h1>
+
+        <p class="subtitulo-info">
+          Plataforma líder para la trazabilidad de <strong>limones</strong> del Atlántico, Colombia, impulsada por
+          tecnología Blockchain.
+        </p>
+
+        <div class="caracteristicas-list">
+          <div class="caracteristica-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" class="icono-caracteristica">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p><strong>Origen Verificado:</strong> Cada limón con su historia completa, desde la cosecha hasta la
+              entrega.</p>
+          </div>
+          <div class="caracteristica-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" class="icono-caracteristica">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21H10.5m-6.75 0L3 16.5m1.5 4.5L7.5 16.5m0 0L9 13.5M3.75 21V9m1.5 3.987l4.331 4.332c.38.38 1.002.116 1.002-.454V5.25a2.25 2.25 0 00-2.25-2.25H9.75a2.25 2.25 0 00-2.25 2.25v10.386c0 .57 1.011.855 1.4.456l4.332-4.332z" />
+            </svg>
+            <p><strong>Seguridad Blockchain:</strong> Datos inmutables que garantizan la autenticidad y frescura.</p>
+          </div>
+          <div class="caracteristica-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" class="icono-caracteristica">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18" />
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M7 7.5c2 0 4 1.5 5 3.5s3 3.5 5 3.5m0-1.5c-2 0-4-1.5-5-3.5s-3-3.5-5-3.5" />
+            </svg>
+            <p><strong>Conexión Directa:</strong> Uniendo agricultores y consumidores en una red transparente.</p>
+          </div>
+        </div>
+
+        <p class="claim-final-organica">
+          Únete a la nueva era de la cadena de suministro del limón.
+        </p>
+      </div>
+    </div>
+
+    <div class="columna-login-organica">
+
+      <div class="card-login-organica">
+
+        <div class="header-login">
+        <div class="logo-formulario-container">
+            <img src="../../../assets/SketchedLemon.svg">
+        </div>
+        <h2 class="titulo-login pt-6">Iniciar Sesión</h2>
+        <p class="subtitulo-login">Ingresa tus credenciales para acceder a la plataforma</p>
+    </div>
+
+        <form class="formulario-login" [formGroup]="loginForm" (ngSubmit)="submit()">
+
+          <div class="campo-grupo">
+            <label for="email" class="sr-only">Correo electrónico</label>
+            <div class="input-contenedor"
+              [class.input-invalido]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icono-input" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+              </svg>
+              <input type="email" id="email" placeholder="Correo electrónico" formControlName="email" />
+            </div>
+            @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+            <div class="mensaje-error">
+              @if (loginForm.get('email')?.errors?.['required']) { <span>El correo es obligatorio.</span> }
+              @if (loginForm.get('email')?.errors?.['email']) { <span>Formato de correo inválido.</span> }
+            </div>
+            }
+          </div>
+
+          <div class="campo-grupo">
+            <label for="password" class="sr-only">Contraseña</label>
+            <div class="input-contenedor"
+              [class.input-invalido]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icono-input" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                  clip-rule="evenodd" />
+              </svg>
+              <input type="password" id="password" placeholder="Contraseña" formControlName="password" />
+            </div>
+            @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+            <div class="mensaje-error">
+              @if (loginForm.get('password')?.errors?.['required']) { <span>La contraseña es obligatoria.</span> }
+            </div>
+            }
+          </div>
+
+          <div class="olvide-password"><span>¿Olvidaste tu Contraseña?</span></div>
+
+          <button type="submit" class="btn-login" [disabled]="loginForm.invalid">ACCEDER</button>
+        </form>
+
+        @if (error) { <div class="alerta-error">
+          <p>{{ error }}</p>
+        </div> }
+
+        <div class="enlace-registro">¿No tienes una cuenta? <a href="#">Regístrate Aquí</a></div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

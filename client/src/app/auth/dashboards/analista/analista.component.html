@@ -1,0 +1,208 @@
+<div class="bg-gray-50 dark:bg-gray-900 dark:text-white text-gray-700 h-screen flex overflow-hidden text-sm">
+
+    <aside
+        class="w-20 flex-shrink-0 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex-col hidden sm:flex">
+
+        <div class="h-16 flex items-center justify-center">
+            <svg class="w-9 text-lime-500 dark:text-lime-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M12 4.5c.75 0 1.5.034 2.247.102a.75.75 0 01.703.743l.006.143V18h3.355a.75.75 0 01.75.75c0 .356-.29.645-.645.645h-3.355v1.25a.75.75 0 01-1.5 0v-1.25h-4.5v1.25a.75.75 0 01-1.5 0v-1.25H4.5c-.356 0-.645-.29-.645-.645a.75.75 0 01.75-.75h3.355V5.345a.75.75 0 01.703-.743A9.704 9.704 0 0112 4.5zM12 5.5a8.25 8.25 0 100 16.5 8.25 8.25 0 000-16.5z" clip-rule="evenodd" />
+            </svg>
+        </div>
+
+        <nav class="flex mx-auto flex-grow mt-4 flex-col space-y-4">
+            <a 
+                routerLink="/analista/contratos" 
+                routerLinkActive="bg-lime-100 text-lime-700 dark:bg-lime-700 dark:text-white"
+                class="h-10 w-12 bg-lime-100 text-lime-700 dark:bg-lime-700 dark:text-white rounded-md flex items-center justify-center transition 
+                        hover:bg-lime-50 dark:hover:bg-gray-700"
+                title="Contratos"
+            >
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" class="h-5 w-5">
+                    <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"></path>
+                    <polyline points="13 2 13 9 20 9"></polyline>
+                </svg>
+            </a>
+
+            <a 
+                routerLink="/analista/reportes" 
+                routerLinkActive="bg-lime-100 text-lime-700 dark:bg-lime-700 dark:text-white"
+                class="h-10 w-12 text-gray-500 dark:text-gray-300 rounded-md flex items-center justify-center transition 
+                        hover:bg-lime-50 hover:text-lime-600 dark:hover:bg-gray-700 dark:hover:text-lime-300"
+                title="Reportes"
+            >
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" class="h-5 w-5">
+                    <path d="M12 20V10"></path>
+                    <path d="M18 20V4"></path>
+                    <path d="M6 20V16"></path>
+                </svg>
+            </a>
+        </nav>
+
+        <div class="mt-auto p-2 border-t border-gray-200 dark:border-gray-700">
+            <button 
+                (click)="logout()" 
+                class="h-10 w-full text-red-600 dark:text-red-500 rounded-md flex items-center justify-center transition 
+                        hover:bg-red-50 dark:hover:bg-gray-700"
+                title="Cerrar Sesión"
+            >
+                <svg viewBox="0 0 24 24" class="h-5 w-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                </svg>
+            </button>
+        </div>
+    </aside>
+
+    <div class="flex-grow overflow-hidden h-full flex flex-col">
+
+        <div class="h-16 flex w-full border-b border-gray-200 dark:border-gray-700 px-6 sm:px-10">
+            
+            <div class="text-xl font-extrabold text-lime-600 dark:text-lime-400 hidden lg:flex items-center">
+                 Panel de Analista
+            </div>
+            
+            <div class="ml-auto flex items-center space-x-4">
+                
+                <div *ngIf="currentUser" class="flex items-center space-x-2">
+                    <span class="relative">
+                        <div
+                            class="w-7 h-7 rounded-full bg-amber-400 text-gray-900 flex items-center justify-center font-bold text-xs">
+                            {{ currentUser.nombre.charAt(0) }}
+                        </div>
+                        <span
+                            class="absolute right-0 bottom-0 w-2 h-2 rounded-full bg-emerald-500 border border-white dark:border-gray-900"></span>
+                    </span>
+                    <div class="hidden sm:block text-right">
+                        <span class="block text-sm font-medium">{{ currentUser.nombre }}</span>
+                        <span class="block text-xs text-lime-600 dark:text-lime-400 font-mono uppercase">{{ currentUser.rol }}</span>
+                    </div>
+                </div>
+
+                <button (click)="logout()" 
+                    class="h-8 w-8 rounded-full flex items-center justify-center text-red-500 hover:bg-red-50 dark:hover:bg-gray-700 transition"
+                    title="Cerrar sesión"
+                >
+                    <svg viewBox="0 0 24 24" class="w-5 h-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex-grow bg-gray-50 dark:bg-gray-900 overflow-y-auto w-full p-6 sm:p-10">
+            
+            <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Análisis de Contratos Pendientes</h2>
+            
+            <div *ngIf="cargando" class="text-lime-600 dark:text-lime-400 font-bold mb-4">Cargando contratos...</div>
+            <div *ngIf="error" class="text-red-600 dark:text-red-400 font-bold mb-4">{{ error }}</div>
+        
+            <div class="flex items-center mb-6 space-x-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+                <input 
+                    type="text" 
+                    placeholder="Buscar agricultor o comprador..." 
+                    [(ngModel)]="searchTerm" 
+                    class="border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white p-2 rounded w-64 focus:ring-lime-500 focus:border-lime-500" 
+                />
+                <select 
+                    [(ngModel)]="filtroEstado" 
+                    class="border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white p-2 rounded focus:ring-lime-500 focus:border-lime-500"
+                >
+                    <option value="">Todos los estados</option>
+                    <option value="PENDIENTE_ANALISIS">Pendiente</option>
+                    <option value="APROBADO_ANALISTA">Aprobado</option>
+                    <option value="RECHAZADO_ANALISTA">Rechazado</option>
+                </select>
+                <span class="text-sm text-gray-500 dark:text-gray-400 ml-4">
+                    Mostrando {{ filteredContratos().length }} contratos.
+                </span>
+                
+                    <button (click)="exportarCSV()" class="bg-lime-600 text-white px-3 py-1 rounded hover:bg-lime-700 flex items-center justify-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        <span>Exportar CSV</span>
+                      </button>
+                      <button (click)="exportarPDF()" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 flex items-center justify-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span>Exportar PDF</span>
+                      </button>
+                  
+                  
+            </div>
+        
+            <div class="overflow-x-auto">
+                <table class="w-full bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 dark:bg-gray-700">
+                        <tr class="text-left text-gray-600 dark:text-gray-300">
+                            <th class="p-4 whitespace-nowrap">ID</th>
+                            <th class="p-4 whitespace-nowrap">Agricultor</th>
+                            <th class="p-4 whitespace-nowrap">Comprador</th>
+                            <th class="p-4 whitespace-nowrap">Cantidad</th>
+                            <th class="p-4 whitespace-nowrap">Precio Unitario (COP)</th>
+                            <th class="p-4 whitespace-nowrap">Valor Total (COP)</th>
+                            <th class="p-4 whitespace-nowrap">Margen Estimado (COP)</th>
+                            <th class="p-4 whitespace-nowrap">Conveniencia</th>
+                            <th class="p-4 whitespace-nowrap">Estado</th>
+                            <th class="p-4 whitespace-nowrap">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of filteredContratos(); let i = index" 
+                            class="border-t border-gray-200 dark:border-gray-700 hover:bg-lime-50 dark:hover:bg-gray-700/50 transition duration-150">
+                            
+                            <td class="p-4 font-mono text-gray-900 dark:text-white">{{ c.id }}</td>
+                            <td class="p-4 font-medium text-gray-900 dark:text-white">{{ c.agricultor_nombre }}</td>
+                            <td class="p-4">{{ c.comprador_nombre }}</td>
+                            <td class="p-4">{{ c.cantidad }}</td>
+                            <td class="p-4 font-mono">{{ c.precio_unitario | number:'1.0-0' }}</td>
+                            <td class="p-4 font-bold font-mono text-lime-700 dark:text-lime-400">{{ valorTotal(c) | number:'1.0-0' }}</td>
+                            <td class="p-4 font-bold font-mono">{{ margen(c) | number:'1.0-0' }}</td>
+                            
+                            <td class="p-4">
+                                <span [ngClass]="{
+                                    'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300': conveniencia(c) === 'Alta',
+                                    'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300': conveniencia(c) === 'Media',
+                                    'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300': conveniencia(c) === 'Baja'
+                                }" class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full">
+                                    {{ conveniencia(c) }}
+                                </span>
+                            </td>
+                            
+                            <td class="p-4">
+                                <span [ngClass]="{
+                                    'text-yellow-600': c.estado === 'PENDIENTE_ANALISIS',
+                                    'text-green-600': c.estado === 'APROBADO_ANALISTA',
+                                    'text-red-600': c.estado === 'RECHAZADO_ANALISTA'
+                                }">
+                                    {{ c.estado }}
+                                </span>
+                            </td>
+                            
+                            <td class="p-4 space-x-2 whitespace-nowrap">
+                                <button *ngIf="c.estado === 'PENDIENTE_ANALISIS'" (click)="aprobar(c)" 
+                                    class="bg-green-600 text-white px-3 py-1 text-xs rounded hover:bg-green-700 transition shadow-md">
+                                    Aprobar
+                                </button>
+                                <button *ngIf="c.estado === 'PENDIENTE_ANALISIS'" (click)="rechazar(c)" 
+                                    class="bg-red-600 text-white px-3 py-1 text-xs rounded hover:bg-red-700 transition shadow-md">
+                                    Rechazar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div *ngIf="filteredContratos().length === 0 && !cargando" class="text-center py-10 text-gray-500 dark:text-gray-400">
+                No se encontraron contratos que coincidan con los filtros.
+            </div>
+
+        </div>
+    </div>
+</div>

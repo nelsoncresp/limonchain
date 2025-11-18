@@ -35,22 +35,37 @@ export async function getAllUsers() {
   `);
   return rows;
 }
-
 export async function updateUser(id, updates) {
-  const allowedFields = ['nombre', 'telefono', 'rol', 'estado'];
+  const allowedFields = ['nombre', 'telefono', 'rol', 'estado', 'email', 'password_hash'];
   const fieldsToUpdate = {};
-  
+
+  // Filtrar solo campos permitidos
   allowedFields.forEach(field => {
     if (updates[field] !== undefined) {
       fieldsToUpdate[field] = updates[field];
     }
   });
 
+  // Validación de email SOLO si viene y es distinto del actual
+  if (updates.email) {
+    const [rows] = await pool.query(
+      "SELECT id FROM users WHERE email = ? AND id <> ? LIMIT 1",
+      [updates.email, id]
+    );
+
+    if (rows.length > 0) {
+      throw new Error('El email ya está en uso por otro usuario');
+    }
+  }
+
   if (Object.keys(fieldsToUpdate).length === 0) {
     return getUserById(id);
   }
 
-  const setClause = Object.keys(fieldsToUpdate).map(field => `${field} = ?`).join(', ');
+  const setClause = Object.keys(fieldsToUpdate)
+    .map(field => `${field} = ?`)
+    .join(', ');
+
   const values = [...Object.values(fieldsToUpdate), id];
 
   const [result] = await pool.query(
@@ -61,6 +76,7 @@ export async function updateUser(id, updates) {
   if (result.affectedRows === 0) return null;
   return getUserById(id);
 }
+
 
 export async function deleteUser(id) {
   const [result] = await pool.query('DELETE FROM users WHERE id = ?', [id]);

@@ -14,10 +14,14 @@ const createUserSchema = Joi.object({
 
 const updateUserSchema = Joi.object({
     nombre: Joi.string().min(3).optional(),
+    email: Joi.string().email().optional(),
     telefono: Joi.string().allow('').optional(),
     rol: Joi.string().valid('AGRICULTOR', 'COMPRADOR', 'ANALISTA', 'ADMIN', 'TRANSPORTISTA').optional(),
-    estado: Joi.boolean().optional()
+    estado: Joi.boolean().optional(),
+    password: Joi.string().min(6).optional(),
+    password_hash: Joi.string().optional()
 });
+
 
 export const AdminController = {
     // Crear cualquier tipo de usuario
@@ -107,13 +111,29 @@ export const AdminController = {
 
             const { id } = req.params;
 
-            // No permitir auto-eliminación o auto-desactivación
             if (parseInt(id) === req.user.id) {
                 return res.status(400).json({ error: 'No puedes modificar tu propio usuario' });
             }
 
             const { error, value } = updateUserSchema.validate(req.body);
             if (error) return res.status(400).json({ message: error.details[0].message });
+            // Si viene email → validar que no exista en otro usuario
+            if (value.email) {
+                const [rows] = await pool.query(
+                    "SELECT id FROM users WHERE email = ? AND id != ?",
+                    [value.email, id]
+                );
+
+                if (rows.length > 0) {
+                    return res.status(400).json({ error: 'El email ya está registrado' });
+                }
+            }
+            // Si viene password → encriptarla
+            if (value.password) {
+                value.password_hash = await hashPassword(value.password);
+                delete value.password;
+            }
+
 
             const updatedUser = await updateUser(id, value);
 
@@ -236,13 +256,13 @@ export const AdminController = {
         }
     },
     // controllers/admin.controller.js - Método completamente corregido
-estadisticasUsuarios: async (req, res) => {
-    try {
-        if (req.user.rol !== 'ADMIN') {
-            return res.status(403).json({ error: 'Solo administradores pueden ver estadísticas' });
-        }
+    estadisticasUsuarios: async (req, res) => {
+        try {
+            if (req.user.rol !== 'ADMIN') {
+                return res.status(403).json({ error: 'Solo administradores pueden ver estadísticas' });
+            }
 
-        const [stats] = await pool.query(`
+            const [stats] = await pool.query(`
             SELECT 
                 rol,
                 COUNT(*) as total,
@@ -253,42 +273,42 @@ estadisticasUsuarios: async (req, res) => {
             ORDER BY total DESC
         `);
 
-        const [totalResult] = await pool.query('SELECT COUNT(*) as total FROM users');
-        const total_usuarios = parseInt(totalResult[0].total);
-        
-        // Convertir todos los valores a números enteros
-        const statsCorregidos = stats.map(item => ({
-            ...item,
-            total: parseInt(item.total),
-            activos: parseInt(item.activos || 0),
-            inactivos: parseInt(item.inactivos || 0)
-        }));
+            const [totalResult] = await pool.query('SELECT COUNT(*) as total FROM users');
+            const total_usuarios = parseInt(totalResult[0].total);
 
-        // Calcular totales correctamente
-        const totalActivos = statsCorregidos.reduce((sum, item) => sum + item.activos, 0);
-        const totalInactivos = statsCorregidos.reduce((sum, item) => sum + item.inactivos, 0);
-        
-        // Verificar que los totales coincidan
-        const totalVerificado = statsCorregidos.reduce((sum, item) => sum + item.total, 0);
-        
-        res.json({
-            total_usuarios: total_usuarios,
-            total_verificado: totalVerificado,
-            por_rol: statsCorregidos,
-            resumen: {
-                total_activos: totalActivos,
-                total_inactivos: totalInactivos,
-                porcentaje_activos: total_usuarios > 0 ? ((totalActivos / total_usuarios) * 100).toFixed(1) + '%' : '0%'
-            }
-        });
+            // Convertir todos los valores a números enteros
+            const statsCorregidos = stats.map(item => ({
+                ...item,
+                total: parseInt(item.total),
+                activos: parseInt(item.activos || 0),
+                inactivos: parseInt(item.inactivos || 0)
+            }));
 
-    } catch (err) {
-        console.error('Error detallado en estadisticasUsuarios:', err);
-        console.error('Stack trace:', err.stack);
-        res.status(500).json({ 
-            error: 'Error al obtener estadísticas',
-            detalle: process.env.NODE_ENV === 'development' ? err.message : undefined
-        });
-    }
-},
+            // Calcular totales correctamente
+            const totalActivos = statsCorregidos.reduce((sum, item) => sum + item.activos, 0);
+            const totalInactivos = statsCorregidos.reduce((sum, item) => sum + item.inactivos, 0);
+
+            // Verificar que los totales coincidan
+            const totalVerificado = statsCorregidos.reduce((sum, item) => sum + item.total, 0);
+
+            res.json({
+                total_usuarios: total_usuarios,
+                total_verificado: totalVerificado,
+                por_rol: statsCorregidos,
+                resumen: {
+                    total_activos: totalActivos,
+                    total_inactivos: totalInactivos,
+                    porcentaje_activos: total_usuarios > 0 ? ((totalActivos / total_usuarios) * 100).toFixed(1) + '%' : '0%'
+                }
+            });
+
+        } catch (err) {
+            console.error('Error detallado en estadisticasUsuarios:', err);
+            console.error('Stack trace:', err.stack);
+            res.status(500).json({
+                error: 'Error al obtener estadísticas',
+                detalle: process.env.NODE_ENV === 'development' ? err.message : undefined
+            });
+        }
+    },
 };

@@ -8,5 +8,7 @@ router.get("/pendientes", auth, AnalisisController.pendientes);
 router.get("/detalle/:id", auth, AnalisisController.detalle);
 router.put("/:id/aprobar", auth, AnalisisController.aprobar);
 router.put("/:id/rechazar", auth, AnalisisController.rechazar);
+router.get("/todos", auth, AnalisisController.todos);
+
 
 export default router;

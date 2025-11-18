@@ -112,6 +112,27 @@ export const ContratosController = {
             console.error(err);
             res.status(500).json({ error: "Error al obtener contratos" });
         }
-    }
+    },
+    getByAgricultor: async (req, res) => {
+        try {
+            const { agricultorId } = req.params;
+            
+            console.log('Obteniendo contratos para agricultor:', agricultorId);
+            if (req.user.rol !== "ADMIN" && parseInt(req.user.id) !== parseInt(agricultorId)) {
+                return res.status(403).json({ error: "No autorizado para ver estos contratos" });
+            }
+
+            const contratos = await ContratosModel.obtenerPorAgricultor(agricultorId);
+            
+            res.json(contratos);
+
+        } catch (error) {
+            console.error(' Error obteniendo contratos por agricultor:', error);
+            res.status(500).json({ 
+                error: "Error al obtener contratos",
+                details: error.message 
+            });
+        }
+    },
 
 };

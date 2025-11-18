@@ -1,0 +1,424 @@
+<div class="bg-gray-50 dark:bg-gray-900 dark:text-white text-gray-700 h-screen flex overflow-hidden font-sans">
+  <aside
+    class="w-28 flex-shrink-0 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex-col hidden sm:flex transition-all duration-300">
+    <div class="h-20 flex items-center justify-center p-3">
+      <svg class="h-10 w-10 text-lime-700 dark:text-lime-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+        fill="currentColor">
+        <path fill-rule="evenodd"
+          d="M10.868 2.37A2 2 0 009.132 2.37L2.37 9.132a2 2 0 00-.738 1.54V16a2 2 0 002 2h12a2 2 0 002-2v-5.328a2 2 0 00-.738-1.54l-6.762-6.762zM9 11V5.414L14.586 11H9z"
+          clip-rule="evenodd" />
+      </svg>
+    </div>
+    <nav class="flex mx-auto flex-grow mt-4 flex-col space-y-4">
+      <a routerLink="/agricultor/dashboard"
+        routerLinkActive="bg-lime-100 text-lime-700 dark:bg-lime-700 dark:text-white"
+        class="h-16 w-16 rounded-xl flex flex-col items-center justify-center p-2 hover:bg-lime-50 dark:hover:bg-gray-700 group transition-colors duration-200"
+        title="Dashboard">
+        <svg class="h-8 w-8 transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+          fill="currentColor">
+          <path
+            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+        </svg>
+        <span class="text-sm mt-1 font-semibold">Inicio</span>
+      </a>
+      <a routerLink="/agricultor/lotes" routerLinkActive="bg-lime-100 text-lime-700 dark:bg-lime-700 dark:text-white"
+        class="h-16 w-16 rounded-xl flex flex-col items-center justify-center p-2 hover:bg-lime-50 dark:hover:bg-gray-700 group transition-colors duration-200"
+        title="Gestión de Lotes">
+        <svg class="h-8 w-8 transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+          fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M11.602 1.624a.5.5 0 00-.916 0l-1.396 3.737c-.328.882-.016 1.88.75 2.564 1.157 1.049 1.547 2.68 1.077 4.135L8.528 17.5a1.25 1.25 0 102.444.965l2.427-6.516c.162-.435.045-.916-.316-1.22l-1.472-1.29a.75.75 0 00-.214.733c.094.407.037.83-.162 1.194l-2.923 5.374a.75.75 0 101.302.708l2.923-5.374a.75.75 0 00.187-.643c.03-.13-.01-.262-.116-.368l-1.47-1.289a.75.75 0 00.187-1.127l.794-.741a.5.5 0 00.32-.455L14.474 4.54a.5.5 0 00-.414-.492l-3.32-.415zM4 12.5a.5.5 0 00.5.5h.5a.5.5 0 000-1H4.5a.5.5 0 00-.5.5zM4 15.5a.5.5 0 00.5.5h.5a.5.5 0 000-1H4.5a.5.5 0 00-.5.5z"
+            clip-rule="evenodd" />
+        </svg>
+        <span class="text-sm mt-1 font-semibold">Lotes</span>
+      </a>
+      <a routerLink="/agricultor/settings" routerLinkActive="bg-lime-100 text-lime-700 dark:bg-lime-700 dark:text-white"
+        class="h-16 w-16 rounded-xl flex flex-col items-center justify-center p-2 hover:bg-lime-50 dark:hover:bg-gray-700 group transition-colors duration-200"
+        title="Configuración">
+        <svg class="h-8 w-8 transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+          fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.3-.484-2.57 1.246-1.49 2.562a1.54 1.54 0 01-.527 1.905c-1.356.345-1.356 2.33 0 2.674a1.54 1.54 0 01.527 1.905c-1.08 1.28.19 3.046 1.49 2.562a1.532 1.532 0 012.286.948c.38 1.56 2.6 1.56 2.98 0a1.532 1.532 0 012.286-.948c1.3.484 2.57-1.246 1.49-2.562a1.54 1.54 0 01.527-1.905c1.356-.345 1.356-2.33 0-2.674a1.54 1.54 0 01-.527-1.905c1.08-1.28-.19-3.046-1.49-2.562a1.532 1.532 0 01-2.286-.948zM10 11a1 1 0 100-2 1 1 0 000 2z"
+            clip-rule="evenodd" />
+        </svg>
+        <span class="text-sm mt-1 font-semibold">Ajustes</span>
+      </a>
+    </nav>
+
+    <div class="mt-auto p-2 border-t border-gray-200 dark:border-gray-700">
+      <button (click)="logout()"
+        class="h-16 w-full text-red-600 dark:text-red-500 rounded-xl flex flex-col items-center justify-center p-2 hover:bg-red-50 dark:hover:bg-gray-700 group transition-colors duration-200"
+        title="Cerrar Sesión">
+        <svg class="h-8 w-8 transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+          fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"
+            clip-rule="evenodd" />
+        </svg>
+        <span class="text-sm mt-1 font-semibold">Salir</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="flex-grow overflow-hidden h-full flex flex-col">
+
+    <div
+      class="h-20 flex w-full border-b border-gray-200 dark:border-gray-700 px-6 sm:px-10 items-center justify-between">
+      <div class="text-3xl font-extrabold text-lime-700 dark:text-lime-400 flex items-center space-x-3">
+        <svg class="h-9 w-9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M10.868 2.37A2 2 0 009.132 2.37L2.37 9.132a2 2 0 00-.738 1.54V16a2 2 0 002 2h12a2 2 0 002-2v-5.328a2 2 0 00-.738-1.54l-6.762-6.762zM9 11V5.414L14.586 11H9z"
+            clip-rule="evenodd" />
+        </svg>
+        <span>Gestión de Cultivos</span>
+      </div>
+
+      <div class="flex items-center space-x-6">
+        <div *ngIf="user" class="flex items-center space-x-3">
+          <div
+            class="w-12 h-12 rounded-full bg-lime-600 dark:bg-lime-500 text-white flex items-center justify-center font-bold text-xl border-2 border-white dark:border-gray-900">
+            {{ user.nombre?.charAt(0) }}
+          </div>
+          <div class="hidden sm:block text-right">
+            <span class="block text-lg font-bold">{{ user.nombre }}</span>
+            <span class="block text-sm text-lime-600 dark:text-lime-400 font-medium uppercase">Agricultor</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-grow bg-gray-100 dark:bg-gray-900 overflow-y-auto w-full p-8 sm:p-12">
+
+      <div class="mb-10">
+        <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white">Bienvenido, {{ user?.nombre }}</h1>
+        <p class="text-xl text-lime-700 dark:text-lime-400 font-medium mt-1">Controla tus lotes y contratos fácilmente.
+        </p>
+      </div>
+
+      <div class="mb-10 flex justify-end">
+        <button (click)="abrirFormularioLote()"
+          class="px-6 py-3 bg-lime-600 hover:bg-lime-700 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+          <span>Crear Nuevo Lote</span>
+        </button>
+      </div>
+
+      <div *ngIf="mostrarFormularioLote"
+        class="mb-12 p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white flex items-center space-x-2">
+          <svg class="h-7 w-7 text-lime-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M11.602 1.624a.5.5 0 00-.916 0l-1.396 3.737c-.328.882-.016 1.88.75 2.564 1.157 1.049 1.547 2.68 1.077 4.135L8.528 17.5a1.25 1.25 0 102.444.965l2.427-6.516c.162-.435.045-.916-.316-1.22l-1.472-1.29a.75.75 0 00-.214.733c.094.407.037.83-.162 1.194l-2.923 5.374a.75.75 0 101.302.708l2.923-5.374a.75.75 0 00.187-.643c.03-.13-.01-.262-.116-.368l-1.47-1.289a.75.75 0 00.187-1.127l.794-.741a.5.5 0 00.32-.455L14.474 4.54a.5.5 0 00-.414-.492l-3.32-.415zM4 12.5a.5.5 0 00.5.5h.5a.5.5 0 000-1H4.5a.5.5 0 00-.5.5zM4 15.5a.5.5 0 00.5.5h.5a.5.5 0 000-1H4.5a.5.5 0 00-.5.5z"
+              clip-rule="evenodd" />
+          </svg>
+          <span>Datos del Nuevo Lote</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <input type="text" placeholder="Nombre del lote *" [(ngModel)]="nuevoLote.nombre"
+            class="p-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl w-full dark:bg-gray-700 dark:text-white text-xl font-medium focus:ring-lime-500 focus:border-lime-500" />
+          <div class="grid grid-cols-3 gap-3">
+            <input type="number" placeholder="Cantidad *" [(ngModel)]="nuevoLote.cantidad"
+              class="col-span-2 p-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl w-full dark:bg-gray-700 dark:text-white text-xl font-medium focus:ring-lime-500 focus:border-lime-500" />
+            <input type="text" placeholder="Unidad (kg) *" [(ngModel)]="nuevoLote.unidad"
+              class="col-span-1 p-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl w-full dark:bg-gray-700 dark:text-white text-xl font-medium focus:ring-lime-500 focus:border-lime-500" />
+          </div>
+          <div>
+            <label class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">Calidad</label>
+            <input type="text" placeholder="Ej: Premium, Estándar, Ecológico" [(ngModel)]="nuevoLote.calidad"
+              class="p-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl w-full dark:bg-gray-700 dark:text-white text-xl font-medium focus:ring-lime-500 focus:border-lime-500" />
+          </div>
+          <div>
+            <label class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">Fecha de Cosecha *</label>
+            <input type="date" [(ngModel)]="nuevoLote.fecha_cosecha"
+              class="p-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl w-full dark:bg-gray-700 dark:text-white text-xl font-medium focus:ring-lime-500 focus:border-lime-500" />
+          </div>
+          <textarea placeholder="Descripción (opcional): Breve resumen del lote" [(ngModel)]="nuevoLote.descripcion"
+            class="p-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl w-full dark:bg-gray-700 dark:text-white text-xl font-medium focus:ring-lime-500 focus:border-lime-500 col-span-1 md:col-span-2"
+            rows="3"></textarea>
+          <input type="text" placeholder="URL de Foto (opcional)" [(ngModel)]="nuevoLote.foto_url"
+            class="p-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl w-full dark:bg-gray-700 dark:text-white text-xl font-medium focus:ring-lime-500 focus:border-lime-500 col-span-1 md:col-span-2" />
+        </div>
+
+        <p class="text-md text-gray-500 dark:text-gray-400 mt-4">* Campos obligatorios. Asegúrate de que la cantidad y
+          la unidad tengan sentido (Ej: 5000 kg).</p>
+
+        <div class="mt-6 flex space-x-6">
+          <button (click)="crearLote()"
+            class="px-8 py-4 bg-lime-600 hover:bg-lime-700 text-white rounded-xl font-bold text-xl shadow-lg transition-colors duration-200">
+            Guardar y Crear
+          </button>
+          <button (click)="cancelarLote()"
+            class="px-8 py-4 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-xl font-bold text-xl shadow-lg transition-colors duration-200">
+            Cancelar
+          </button>
+        </div>
+      </div>
+      <div
+        class="mb-12 p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white flex items-center space-x-2">
+          <svg class="h-7 w-7 text-lime-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h3m-3 4h3m-6-4h.01M9 16h.01" />
+          </svg>
+          <span>Mis Lotes Registrados</span>
+        </h2>
+        
+        <div class="grid grid-cols-1 gap-8">
+          <ng-container *ngFor="let lote of lotes">
+            <div (click)="selectLote(lote)"
+              [class.border-lime-600]="selectedLote?.id === lote.id" [class.shadow-2xl]="selectedLote?.id === lote.id"
+              [class.shadow-lime-400]="selectedLote?.id === lote.id"
+              class="p-6 border-4 border-gray-300 dark:border-gray-700 rounded-2xl cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-[1.03] dark:hover:bg-gray-700/70 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 items-center">
+              <h3 class="font-extrabold text-lg text-gray-900 dark:text-white col-span-2 md:col-span-1">{{ lote.nombre }}</h3>
+              <p class="text-base text-gray-600 dark:text-gray-300">
+                <span class="font-bold">Cant:</span> <span class="font-mono font-semibold">{{ lote.cantidad }} {{ lote.unidad }}</span>
+              </p>
+              <p *ngIf="lote.calidad" class="text-base">
+                <span class="font-bold">Calidad:</span> <span
+                  class="font-semibold text-purple-600 dark:text-purple-400">{{ lote.calidad }}</span>
+              </p>
+              <p *ngIf="lote.fecha_cosecha" class="text-base hidden lg:block">
+                <span class="font-bold">Cosecha:</span> <span class="font-semibold text-blue-600 dark:text-blue-400">{{
+                  lote.fecha_cosecha | date:'dd/MM/yyyy' }}</span>
+              </p>
+              <p class="text-base">
+                <span class="font-bold">Estado:</span>
+                <span [ngClass]="{
+                  'text-green-600 dark:text-green-400 font-bold': lote.estado === 'DISPONIBLE',
+                  'text-yellow-600 dark:text-yellow-400 font-bold': lote.estado === 'RESERVADO',
+                  'text-blue-600 dark:text-blue-400 font-bold': lote.estado === 'EN_TRANSPORTE',
+                  'text-gray-500 dark:text-gray-400 font-bold': lote.estado === 'ENTREGADO'
+                }">{{ lote.estado }}</span>
+              </p>
+            </div>
+            
+            <div *ngIf="selectedLote?.id === lote.id"
+              class="col-span-1 p-8 bg-lime-50 dark:bg-gray-700 rounded-b-2xl shadow-inner border border-lime-300 dark:border-gray-600 transition-all duration-500">
+              
+              <div class="flex justify-between items-start mb-6">
+                <h3 class="text-3xl font-extrabold text-lime-700 dark:text-lime-400 flex items-center space-x-3">
+                  <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                  </svg>
+                  <span>Detalle del Lote</span>
+                </h3>
+                <button (click)="clearSelection()"
+                  class="text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-600"
+                  title="Cerrar detalle">
+                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+                      <p class="font-semibold text-gray-600 dark:text-gray-300">Cantidad Total</p>
+                      <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ lote.cantidad }} {{ lote.unidad }}</p>
+                  </div>
+                  <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+                      <p class="font-semibold text-gray-600 dark:text-gray-300">Calidad</p>
+                      <p class="text-2xl font-bold text-purple-600 dark:text-purple-400">{{ lote.calidad || 'N/A' }}</p>
+                  </div>
+                  <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+                      <p class="font-semibold text-gray-600 dark:text-gray-300">Cosecha</p>
+                      <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ lote.fecha_cosecha | date:'dd/MM/yyyy' }}</p>
+                  </div>
+              </div>
+
+              <div *ngIf="lote.descripcion" class="mb-8">
+                  <h4 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Descripción</h4>
+                  <p class="text-lg text-gray-800 dark:text-gray-200 italic p-4 bg-white dark:bg-gray-800 rounded-xl shadow">{{ lote.descripcion }}</p>
+              </div>
+
+              <div class="border-t border-gray-300 dark:border-gray-600 pt-6">
+                <h4 class="text-xl font-bold mb-4 text-gray-800 dark:text-white flex items-center space-x-2">
+                  <svg class="h-6 w-6 text-lime-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.881a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                  </svg>
+                  <span>Historial del Lote (Trazabilidad)</span>
+                  <span *ngIf="eventos.length > 0"
+                    class="bg-lime-200 text-lime-800 text-sm font-bold px-3 py-1 rounded-full dark:bg-lime-800 dark:text-lime-200">
+                    {{ eventos.length }} eventos
+                  </span>
+                </h4>
+                
+                <div *ngIf="eventos.length > 0" class="space-y-4">
+                  <div *ngFor="let evento of eventos"
+                    class="p-4 border-l-4 border-lime-500 rounded-lg bg-white dark:bg-gray-800 shadow border border-gray-200 dark:border-gray-700">
+                    <div class="flex justify-between items-start">
+                      <p class="font-bold text-lg text-gray-900 dark:text-white">{{ evento.evento }}</p>
+                      <span class="text-sm text-gray-500 bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded">
+                        {{ evento.fecha | date:'dd/MM/yy' }}
+                      </span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 text-lg">{{ evento.descripcion }}</p>
+                    <div *ngIf="evento.hash_blockchain" class="mt-2">
+                      <p
+                        class="text-xs bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded inline-block">
+                        🔗 Blockchain
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="eventos.length === 0"
+                  class="text-center py-8 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg">
+                  <svg class="h-12 w-12 mx-auto text-gray-400 mb-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p class="text-lg text-gray-500 dark:text-gray-400 font-medium">No hay historial para este lote</p>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div
+        class="mb-12 p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white flex items-center space-x-2">
+          <svg class="h-7 w-7 text-lime-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+          </svg>
+          <span>Mis Contratos Activos</span>
+        </h2>
+        
+        <div class="grid grid-cols-1 gap-8">
+          <ng-container *ngFor="let contrato of contratos">
+            <div (click)="selectContrato(contrato)"
+              [class.border-blue-600]="selectedContrato?.id === contrato.id" [class.shadow-2xl]="selectedContrato?.id === contrato.id"
+              [class.shadow-blue-400]="selectedContrato?.id === contrato.id"
+              class="p-6 border-4 border-gray-300 dark:border-gray-700 rounded-2xl cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-[1.03] dark:hover:bg-gray-700/70 grid grid-cols-2 md:grid-cols-4 items-center">
+              <h3 class="font-extrabold text-lg text-gray-900 dark:text-white col-span-2 md:col-span-1">Contrato #{{ contrato.id }}</h3>
+              <p class="text-base text-gray-600 dark:text-gray-300">
+                <span class="font-bold">Lote:</span> <span class="font-medium">{{ contrato.lote_nombre }}</span>
+              </p>
+              <p class="text-base">
+                <span class="font-bold">Comprador:</span> <span class="font-medium text-lime-700 dark:text-lime-400">{{
+                  contrato.comprador_nombre }}</span>
+              </p>
+              <p class="text-base">
+                <span class="font-bold">Estado:</span>
+                <span [ngClass]="{
+                  'text-green-600 dark:text-green-400 font-bold': contrato.estado === 'APROBADO',
+                  'text-red-600 dark:text-red-400 font-bold': contrato.estado === 'RECHAZADO',
+                  'text-yellow-600 dark:text-yellow-400 font-bold': contrato.estado === 'PENDIENTE'
+                }">{{ contrato.estado }}</span>
+              </p>
+            </div>
+            
+            <div *ngIf="selectedContrato?.id === contrato.id"
+              class="col-span-1 p-8 bg-blue-50 dark:bg-gray-700 rounded-b-2xl shadow-inner border border-blue-300 dark:border-gray-600 transition-all duration-500">
+              
+              <div class="flex justify-between items-start mb-6">
+                <h3 class="text-3xl font-extrabold text-blue-700 dark:text-blue-400 flex items-center space-x-3">
+                  <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                  </svg>
+                  <span>Detalle del Contrato</span>
+                </h3>
+                <button (click)="clearSelection()"
+                  class="text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-600"
+                  title="Cerrar detalle">
+                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+                      <p class="font-semibold text-gray-600 dark:text-gray-300">Lote Asociado</p>
+                      <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ contrato.lote_nombre }}</p>
+                  </div>
+                  <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow md:col-span-2">
+                      <p class="font-semibold text-gray-600 dark:text-gray-300">Comprador</p>
+                      <p class="text-2xl font-bold text-blue-600 dark:text-blue-400">{{ contrato.comprador_nombre }}</p>
+                  </div>
+                  <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+                      <p class="font-semibold text-gray-600 dark:text-gray-300">Fecha de Creación</p>
+                      <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ contrato.fecha_creacion | date:'dd/MM/yyyy' }}</p>
+                  </div>
+              </div>
+
+              <div class="border-t border-gray-300 dark:border-gray-600 pt-6">
+                <h4 class="text-xl font-bold mb-4 text-gray-800 dark:text-white flex items-center space-x-2">
+                  <svg class="h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.881a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                  </svg>
+                  <span>Historial del Contrato (Trazabilidad)</span>
+                  <span *ngIf="eventos.length > 0"
+                    class="bg-blue-200 text-blue-800 text-sm font-bold px-3 py-1 rounded-full dark:bg-blue-800 dark:text-blue-200">
+                    {{ eventos.length }} eventos
+                  </span>
+                </h4>
+                
+                <div *ngIf="eventos.length > 0" class="space-y-4">
+                  <div *ngFor="let evento of eventos"
+                    class="p-4 border-l-4 border-blue-500 rounded-lg bg-white dark:bg-gray-800 shadow border border-gray-200 dark:border-gray-700">
+                    <div class="flex justify-between items-start">
+                      <p class="font-bold text-lg text-gray-900 dark:text-white">{{ evento.evento }}</p>
+                      <span class="text-sm text-gray-500 bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded">
+                        {{ evento.fecha | date:'dd/MM/yy' }}
+                      </span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 text-lg">{{ evento.descripcion }}</p>
+                    <div *ngIf="evento.hash_blockchain" class="mt-2">
+                      <p
+                        class="text-xs bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded inline-block">
+                        🔗 Blockchain
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="eventos.length === 0"
+                  class="text-center py-8 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg">
+                  <svg class="h-12 w-12 mx-auto text-gray-400 mb-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p class="text-lg text-gray-500 dark:text-gray-400 font-medium">No hay historial para este contrato</p>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white flex items-center space-x-2">
+          <svg class="h-7 w-7 text-lime-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.881a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+          </svg>
+          <span>Resumen de Trazabilidad</span>
+        </h2>
+
+        <div class="text-center text-gray-500 dark:text-gray-400 py-8">
+          <svg class="h-16 w-16 mx-auto mb-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p class="text-xl">Haz click en un lote o contrato para ver su trazabilidad **directamente aquí abajo**.</p>
+      </div>
+
+    </div>
+  </div>
+
+
+  </div>
