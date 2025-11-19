@@ -6,17 +6,18 @@ export const contratosDetalle = async (req, res) => {
                 c.id,
                 c.estado,
                 c.fecha_creacion,
-                c.fecha_aprobado,
-                c.fecha_blockchain,
+                c.fecha_actualizacion,
+                c.fecha_entrega,
                 a.nombre AS agricultor,
                 b.nombre AS comprador,
                 l.nombre AS lote,
-                l.peso,
-                l.variedad
+                l.cantidad,
+                l.unidad,
+                l.calidad
             FROM contratos c
-            LEFT JOIN users a ON c.id_agricultor = a.id
-            LEFT JOIN users b ON c.id_comprador = b.id
-            LEFT JOIN lotes l ON c.id_lote = l.id
+            LEFT JOIN users a ON c.agricultor_id = a.id
+            LEFT JOIN users b ON c.comprador_id = b.id
+            LEFT JOIN lotes l ON c.lote_id = l.id
             ORDER BY c.fecha_creacion DESC;
         `);
 
@@ -27,17 +28,15 @@ export const contratosDetalle = async (req, res) => {
         res.status(500).json({ error: "Error al obtener contratos detallados" });
     }
 };
+
 export const blockchainDetalle = async (req, res) => {
     try {
         const [rows] = await pool.query(`
             SELECT 
                 id,
-                index_block,
-                timestamp,
                 hash,
                 previous_hash,
-                JSON_LENGTH(data) AS total_contratos,
-                data
+                fecha_creacion
             FROM blockchain_blocks
             ORDER BY id DESC
             LIMIT 20;
@@ -50,6 +49,10 @@ export const blockchainDetalle = async (req, res) => {
         res.status(500).json({ error: "Error en blockchain detalle" });
     }
 };
+
+
+
+
 export const actividadDiaria = async (req, res) => {
     try {
         const [rows] = await pool.query(`
@@ -75,7 +78,7 @@ export const lotesDetalle = async (req, res) => {
             SELECT 
                 estado,
                 COUNT(*) AS total,
-                SUM(peso) AS peso_total
+                SUM(cantidad) AS cantidad_total
             FROM lotes
             GROUP BY estado;
         `);
@@ -87,3 +90,4 @@ export const lotesDetalle = async (req, res) => {
         res.status(500).json({ error: "Error al obtener lotes detalle" });
     }
 };
+

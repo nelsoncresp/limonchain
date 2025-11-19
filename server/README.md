@@ -210,13 +210,13 @@ El **Transportista** gestiona rutas y entrega de lotes.
 
 | Módulo       | ADMIN | Analista | Agricultor | Comprador | Transportista |
 | ------------ | ----- | -------- | ---------- | --------- | ------------- |
-| Usuarios     | ✔     | ❌       | ❌         | ❌        | ❌            |
-| Lotes        | ✔     | ✔        | ✔          | ✔         | ❌            |
-| Contratos    | ✔     | ✔        | ❌         | ✔         | ❌            |
-| Blockchain   | ✔     | ❌       | ❌         | ❌        | ❌            |
-| Transporte   | ✔     | ❌       | ❌         | ❌        | ✔             |
-| Notificaciones | ✔   | ❌       | ✔          | ✔         | ✔             |
-| Estadísticas | ✔     | ✔        | ❌         | ❌        | ❌            |
+| Usuarios     | ✔     | ❌       | ❌         | ❌        | ❌          |
+| Lotes        | ✔     | ✔        | ✔          | ✔         | ❌          |
+| Contratos    | ✔     | ✔        | ❌         | ✔         | ❌          |
+| Blockchain   | ✔     | ❌       | ❌         | ❌        | ❌          |
+| Transporte   | ✔     | ❌       | ❌         | ❌        | ✔           |
+| Notificaciones | ✔   | ❌       | ✔          | ✔         | ✔           |
+| Estadísticas | ✔     | ✔        | ❌         | ❌        | ❌          |
 
 
 **LimonChain** es un sistema seguro, trazable y modular, listo para integrarse con frontend moderno, dashboards y auditoría completa.  

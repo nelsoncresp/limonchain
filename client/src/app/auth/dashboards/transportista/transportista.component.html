@@ -1,1 +1,168 @@
-<p>transportista works!</p>
+<!-- ========================================================================================================================
+     CONTENEDOR PRINCIPAL
+     ======================================================================================================================== -->
+<div class="p-4 sm:p-6 max-w-7xl mx-auto">
+
+  <!-- GRID PRINCIPAL (3 columnas de contenido / 1 columna de aside en pantallas grandes) -->
+  <div class="grid grid-cols-1 lg:grid-cols-4 lg:gap-8">
+
+    <!-- CONTENIDO PRINCIPAL (3/4 del ancho en LG+) -->
+    <div class="lg:col-span-3 space-y-6">
+      
+      <!-- TÍTULO DE LA SECCIÓN -->
+      <header class="pb-4 border-b border-gray-200 dark:border-gray-700">
+        <h1 class="text-3xl font-extrabold text-gray-900 dark:text-white flex items-center space-x-3">
+          <svg class="w-8 h-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+          </svg>
+          <span>Mis Transportes</span>
+        </h1>
+      </header>
+
+      <!-- INDICADOR DE CARGA (LOADING) -->
+      <div *ngIf="loading" class="flex flex-col items-center justify-center py-12 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-inner">
+        <svg class="animate-spin h-10 w-10 text-blue-600 dark:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <p class="mt-4 text-xl font-medium text-gray-600 dark:text-gray-300">
+          Cargando listado de transportes...
+        </p>
+      </div>
+
+      <!-- LISTADO DE TRANSPORTES (GRID DE TARJETAS) -->
+      <div *ngIf="!loading && transportes.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- CARD DE TRANSPORTE - Contenido y lógica sin cambios -->
+        <div *ngFor="let t of transportes" 
+            class="p-5 border rounded-2xl shadow-lg bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:shadow-xl transition duration-300">
+          
+          <p class="text-xl font-bold text-gray-900 dark:text-white mb-3">Transporte #{{ t.id }}</p>
+
+          <div class="space-y-2 text-md text-gray-700 dark:text-gray-300 border-b pb-3 mb-3 border-dashed dark:border-gray-700">
+            <p>
+              <strong class="font-semibold text-gray-900 dark:text-white">Ruta:</strong> 
+              <span class="text-blue-600 dark:text-blue-400 font-medium">{{ t.ruta }}</span>
+            </p>
+            <p>
+              <strong class="font-semibold text-gray-900 dark:text-white">Asignado:</strong> 
+              <span class="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-sm">{{ t.fecha_asignacion | date:'dd/MM/yyyy' }}</span>
+            </p>
+            <p>
+              <strong class="font-semibold text-gray-900 dark:text-white">Estado actual:</strong> 
+              <span class="font-bold text-lg px-2 rounded-full"
+                [ngClass]="{
+                  'text-blue-600': t.estado === 'EN_RUTA',
+                  'text-green-600': t.estado === 'ENTREGADO',
+                  'text-yellow-600': t.estado === 'PENDIENTE',
+                  'text-gray-600': t.estado !== 'EN_RUTA' && t.estado !== 'ENTREGADO' && t.estado !== 'PENDIENTE'
+                }">
+                {{ t.estado }}
+              </span>
+            </p>
+          </div>
+
+          <!-- FORMULARIO DE ACTUALIZACIÓN DE ESTADO -->
+          <div class="mt-4">
+            <label class="block text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Actualizar estado:</label>
+            <select 
+              [(ngModel)]="nuevoEstado[t.id]" 
+              class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl p-3 w-full focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+              <option value="PENDIENTE">PENDIENTE</option>
+              <option value="EN_RUTA">EN RUTA</option>
+              <option value="ENTREGADO">ENTREGADO</option>
+            </select>
+
+            <button 
+              class="mt-3 w-full bg-blue-600 text-white font-bold px-4 py-2.5 rounded-xl hover:bg-blue-700 transition duration-200 shadow-md"
+              (click)="actualizarEstado(t.id)">
+              Guardar
+            </button>
+          </div>
+
+          <!-- EVIDENCIA -->
+          <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700" *ngIf="t.evidencia_url">
+            <p class="font-semibold text-gray-800 dark:text-gray-200 mb-2">Foto de Evidencia:</p>
+            <img [src]="t.evidencia_url" class="w-full max-w-xs h-auto rounded-xl shadow-lg border border-gray-300 dark:border-gray-600 object-cover">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SIN DATOS (CONDICIÓN SOLICITADA) -->
+      <div *ngIf="!loading && transportes.length === 0" 
+          class="text-center py-16 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl">
+        <svg class="h-16 w-16 mx-auto text-gray-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10m-8-4l8 4" />
+        </svg>
+        <p class="text-xl text-gray-600 dark:text-gray-400 font-medium">
+          No tienes transportes asignados.
+        </p>
+        <p class="text-md text-gray-500 dark:text-gray-500 mt-1">
+          Tus contratos aparecerán aquí cuando sean despachados.
+        </p>
+      </div>
+
+      <!-- BOTÓN PRINCIPAL PARA REPORTE -->
+      <div class="pt-6 border-t border-gray-200 dark:border-gray-700 flex justify-end">
+        <button 
+          class="px-6 py-3 bg-lime-600 text-white font-bold text-lg rounded-xl hover:bg-lime-700 
+                 transition duration-200 shadow-xl"
+          (click)="verReporte()">
+          Ver Reporte General de Flota
+        </button>
+      </div>
+
+    </div>
+    
+    <!-- ASIDE DERECHO (1/4 del ancho en LG+) - Barra lateral pegajosa de LimonChain -->
+    <aside class="hidden lg:block lg:col-span-1 space-y-6 pt-[60px]">
+        <div class="sticky top-4">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-5 border border-gray-200 dark:border-gray-700">
+                <div class="flex items-center space-x-3 border-b border-lime-200 dark:border-lime-700 pb-3 mb-4">
+                    <!-- Icono de Blockchain -->
+                    <svg class="h-8 w-8 text-lime-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.881a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                    </svg>
+                    <h3 class="text-xl font-extrabold text-lime-600 dark:text-lime-400">LimonChain</h3>
+                </div>
+                
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                    Como transportista, estás enlazado directamente a la trazabilidad de la fruta. Cada acción aquí genera un evento inmutable.
+                </p>
+                
+                <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-400">
+                    <li class="flex items-center space-x-2">
+                        <svg class="h-4 w-4 text-lime-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        <span>Transparencia total.</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="h-4 w-4 text-lime-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        <span>Registro inmutable de la carga.</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="h-4 w-4 text-lime-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        <span>Fácil acceso al historial completo.</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Botón de Cerrar Sesión (Logout) -->
+            <div class="mt-6">
+                <button 
+                    (click)="logout()"
+                    class="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition duration-200 shadow-lg">
+                    <!-- Heroicon: ArrowLeftOnRectangle (Logout) -->
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                    </svg>
+                    <span class="text-lg">Cerrar Sesión</span>
+                </button>
+            </div>
+            
+        </div>
+    </aside>
+
+  </div> <!-- Fin del Grid Principal -->
+
+</div> <!-- Fin del Contenedor Principal -->

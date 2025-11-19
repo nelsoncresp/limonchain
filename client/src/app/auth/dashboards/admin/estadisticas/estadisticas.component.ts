@@ -25,13 +25,20 @@ import {
 export class EstadisticasComponent implements OnInit {
 
   // === APEX CHART ===
-  chartContratos!: {
-    series: ApexAxisChartSeries;
-    chart: ApexChart;
-    xaxis: ApexXAxis;
-    dataLabels: ApexDataLabels;
-    title: ApexTitleSubtitle;
-  };
+  chartContratos: {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  dataLabels: ApexDataLabels;
+  title: ApexTitleSubtitle;
+} = {
+  series: [{ name: '', data: [] }],
+  chart: { type: 'bar', height: 350 },
+  xaxis: { categories: [] },
+  dataLabels: { enabled: true },
+  title: { text: '' }
+};
+
 
   // === DETALLES ===
   bloques: any[] = [];
@@ -83,9 +90,6 @@ export class EstadisticasComponent implements OnInit {
     this.cargarBlockchainDetalle();
     this.cargarActividad();
     this.cargarLotesDetalle();
-
-    // Inicializar gráfica
-    setTimeout(() => this.generarChartContratos(), 300);
   }
 
   // =====================================
@@ -145,6 +149,7 @@ export class EstadisticasComponent implements OnInit {
       this.contratosRevision = contratos.filter((c: Contrato) => c.estado === 'PENDIENTE_ANALISIS').length;
       this.contratosRechazados = contratos.filter((c: Contrato) => c.estado === 'RECHAZADO').length;
       this.contratosBlockchain = contratos.filter((c: Contrato) => c.estado === 'EN_BLOCKCHAIN').length;
+      this.generarChartContratos();
     });
   }
 
@@ -200,10 +205,11 @@ export class EstadisticasComponent implements OnInit {
   }
 
   cargarBlockchainDetalle() {
-    this.estService.getBlockchainDetalle().subscribe(res => {
-      this.bloques = res.blocks;
-    });
-  }
+  this.estService.getBlockchainDetalle().subscribe(res => {
+    this.bloques = res.blocks;
+  });
+}
+
 
   cargarActividad() {
     this.estService.getActividadDiaria().subscribe(res => {

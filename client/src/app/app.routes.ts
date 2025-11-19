@@ -8,9 +8,11 @@ import { AnalistaComponent } from './auth/dashboards/analista/analista.component
 import { AuthGuard } from './auth/guard/auth.guard';
 import { UsuariosComponent } from './auth/dashboards/admin/users/usuarios.component';
 import { EstadisticasComponent } from './auth/dashboards/admin/estadisticas/estadisticas.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
    {
     path: 'admin',
     component: AdminComponent,

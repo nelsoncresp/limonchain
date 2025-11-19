@@ -14,7 +14,6 @@ export const TransporteController = {
 
             const { contrato_id, transportista_id, ruta } = req.body;
 
-            // Verificar que el contrato existe y está en estado correcto
             const contrato = await ContratosModel.obtenerContrato(contrato_id);
             if (!contrato) {
                 return res.status(404).json({ error: 'Contrato no encontrado' });
@@ -26,16 +25,13 @@ export const TransporteController = {
                 });
             }
 
-            // Verificar que no tenga transporte asignado
             const transporteExistente = await TransporteModel.obtenerPorContrato(contrato_id);
             if (transporteExistente) {
                 return res.status(400).json({ error: 'Este contrato ya tiene transporte asignado' });
             }
 
-            // Crear registro de transporte
             const transporte_id = await TransporteModel.crearTransporte(contrato_id, transportista_id, ruta);
             
-            // Actualizar estados
             await ContratosModel.cambiarEstado(contrato_id, 'EN_TRANSPORTE');
             await LotesModel.cambiarEstado(contrato.lote_id, 'EN_TRANSPORTE');
 
@@ -50,11 +46,11 @@ export const TransporteController = {
         }
     },
 
-    // Obtener transportes del transportista actual
-    misTransportes: async (req, res) => {
+    // Transportista ve sus rutas
+    my: async (req, res) => {
         try {
             if (req.user.rol !== 'TRANSPORTISTA') {
-                return res.status(403).json({ error: 'Solo transportistas pueden ver sus transportes' });
+                return res.status(403).json({ error: 'Solo transportistas pueden ver sus rutas' });
             }
 
             const transportes = await TransporteModel.obtenerPorTransportista(req.user.id);
@@ -62,12 +58,47 @@ export const TransporteController = {
 
         } catch (err) {
             console.error(err);
-            res.status(500).json({ error: 'Error al obtener transportes' });
+            res.status(500).json({ error: 'Error al obtener rutas' });
+        }
+    },
+
+    // Reportar entrega (agrega evidencia)
+    report: async (req, res) => {
+        try {
+            if (req.user.rol !== 'TRANSPORTISTA') {
+                return res.status(403).json({ error: 'Solo transportistas pueden reportar entregas' });
+            }
+
+            const { transporte_id, evidencia_url } = req.body;
+
+            const transporte = await TransporteModel.obtenerPorId(transporte_id);
+            if (!transporte) {
+                return res.status(404).json({ error: 'Transporte no encontrado' });
+            }
+
+            if (transporte.transportista_id !== req.user.id) {
+                return res.status(403).json({ error: 'No puedes reportar este transporte' });
+            }
+
+            await TransporteModel.actualizarEstado(transporte_id, 'ENTREGADO', evidencia_url);
+
+            await ContratosModel.cambiarEstado(transporte.contrato_id, 'ENTREGADO');
+            const contrato = await ContratosModel.obtenerContrato(transporte.contrato_id);
+            await LotesModel.cambiarEstado(contrato.lote_id, 'ENTREGADO');
+
+            res.json({
+                message: "Entrega reportada con éxito",
+                evidencia_url
+            });
+
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Error al reportar entrega' });
         }
     },
 
     // Actualizar estado del transporte
-    actualizarEstado: async (req, res) => {
+    updateStatus: async (req, res) => {
         try {
             if (req.user.rol !== 'TRANSPORTISTA') {
                 return res.status(403).json({ error: 'Solo transportistas pueden actualizar estados' });
@@ -81,7 +112,6 @@ export const TransporteController = {
                 return res.status(400).json({ error: 'Estado no válido' });
             }
 
-            // Verificar que el transporte pertenece al transportista
             const transporte = await TransporteModel.obtenerPorId(id);
             if (!transporte) {
                 return res.status(404).json({ error: 'Transporte no encontrado' });
@@ -91,12 +121,8 @@ export const TransporteController = {
                 return res.status(403).json({ error: 'No tienes permisos para este transporte' });
             }
 
-            const success = await TransporteModel.actualizarEstado(id, estado, evidencia_url);
-            if (!success) {
-                return res.status(404).json({ error: 'Error al actualizar transporte' });
-            }
+            await TransporteModel.actualizarEstado(id, estado, evidencia_url);
 
-            // Si se entregó, actualizar contrato y lote
             if (estado === 'ENTREGADO') {
                 await ContratosModel.cambiarEstado(transporte.contrato_id, 'ENTREGADO');
                 const contrato = await ContratosModel.obtenerContrato(transporte.contrato_id);
@@ -109,12 +135,12 @@ export const TransporteController = {
             });
 
         } catch (err) {
-            console.error('Error en actualizarEstado:', err);
+            console.error('Error en updateStatus:', err);
             res.status(500).json({ error: 'Error al actualizar estado' });
         }
     },
 
-    // Obtener todos los transportes (solo ADMIN)
+    // ADMIN — obtener todos
     obtenerTodos: async (req, res) => {
         try {
             if (req.user.rol !== 'ADMIN') {
