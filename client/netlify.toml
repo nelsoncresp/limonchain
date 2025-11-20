@@ -1,9 +1,0 @@
-[build]
-  base = "."                       # porque ya estamos dentro de client/
-  publish = "dist/client/browser"  # donde Angular realmente construye
-  command = "npm install && ng build --configuration production"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
