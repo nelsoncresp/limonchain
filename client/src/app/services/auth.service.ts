@@ -6,7 +6,7 @@ import { map, Observable, tap } from "rxjs";
     providedIn:'root'
 })
 export class AuthService{
-    private baseUrl='http://localhost:3000/api/auth';
+    private baseUrl='https://limonchain-api.onrender.com/api/auth';
 
     constructor(private http: HttpClient){}
     login(email: string, password: string): Observable<any> {

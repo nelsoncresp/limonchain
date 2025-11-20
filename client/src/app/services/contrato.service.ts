@@ -32,7 +32,7 @@ export interface ContratoExtendida extends Contrato {
   providedIn: 'root'
 })
 export class ContratosService {
-  private baseUrl = 'http://localhost:3000/api/contratos';
+  private baseUrl = 'https://limonchain-api.onrender.com/api/contratos';
 
   constructor(private http: HttpClient) {}
 

@@ -7,7 +7,7 @@ import { Contrato } from '../interfaces/Contrato';
   providedIn: 'root'
 })
 export class AnalisisService {
-  private baseUrl = 'http://localhost:3000/api/analisis';
+  private baseUrl = 'https://limonchain-api.onrender.com/api/analisis';
 
   constructor(private http: HttpClient) { }
   obtenerTodos(): Observable<Contrato[]> {

@@ -16,7 +16,7 @@ export interface EventoTrazabilidad {
   providedIn: 'root'
 })
 export class TrazabilidadService {
-  private baseUrl = 'http://localhost:3000/api/trazabilidad';
+  private baseUrl = 'https://limonchain-api.onrender.com/api/trazabilidad';
 
   constructor(private http: HttpClient) {}
   testBackendConnection(): void {

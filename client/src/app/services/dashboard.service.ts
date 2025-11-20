@@ -38,7 +38,7 @@ export interface Transporte {
   providedIn: 'root'
 })
 export class DashboardService {
-  private base = 'http://localhost:3000/api';
+  private base = 'https://limonchain-api.onrender.com/api';
 
   constructor(private http: HttpClient) {}
 

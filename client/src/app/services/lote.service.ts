@@ -33,7 +33,7 @@ export interface LoteDisponible extends Lote {
   providedIn: 'root'
 })
 export class LotesService {
-  private baseUrl = 'http://localhost:3000/api/lotes';
+  private baseUrl = 'https://limonchain-api.onrender.com/api/lotes';
 
   constructor(private http: HttpClient) {}
 

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class EstadisticasService {
 
-  private API = 'http://localhost:3000/api/admin/estadisticas';
+  private API = 'https://limonchain-api.onrender.com/api/admin/estadisticas';
 
   constructor(private http: HttpClient) {}
 

@@ -10,7 +10,7 @@ export class TransporteService {
     private http = inject(HttpClient);
 
     // Cambia esto según tu API
-    private apiUrl = 'http://localhost:3000/api/transporte';
+    private apiUrl = 'https://limonchain-api.onrender.com/api/transporte';
 
     constructor() { }
 

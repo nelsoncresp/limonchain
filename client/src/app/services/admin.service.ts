@@ -17,7 +17,8 @@ export interface Usuario {
   providedIn: 'root'
 })
 export class AdminService {
-  private baseUrl = 'http://localhost:3000/api/admin/usuarios';
+
+  private baseUrl = 'https://limonchain-api.onrender.com/api/admin/usuarios';
 
   constructor(private http: HttpClient) {}
 
