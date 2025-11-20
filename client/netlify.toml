@@ -1,0 +1,11 @@
+
+[build]
+  # Configuración de compilación para Netlify
+  command = "npm install && ng build --configuration production"
+  publish = "dist/client"
+
+[[redirects]]
+  # Regla de Redirección para Angular SPA
+  from = "/*"
+  to = "/index.html"
+  status = 200
