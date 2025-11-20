@@ -1,17 +1,13 @@
 # Archivo: netlify.toml (en la raíz del repositorio)
 
 [build]
-  # 1. Definir la carpeta donde se ejecutarán los comandos (Base directory)
   base = "client" 
-
-  # 2. Comando de compilación (incluyendo el fix de base-href)
   command = "npm install && ng build --configuration production --base-href /"
-
-  # 3. Carpeta de publicación (Publish directory, ruta completa desde la raíz)
-  publish = "client/dist/client"
+  
+  # CORRECCIÓN CLAVE: Debe ser relativa a la carpeta "client"
+  publish = "dist/client" 
 
 [[redirects]]
-  # 4. Regla de redirección para Angular SPA (solución al 404)
   from = "/*"
   to = "/index.html"
   status = 200
