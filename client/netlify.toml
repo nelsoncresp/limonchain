@@ -1,11 +1,7 @@
-# Archivo: netlify.toml (en la raíz del repositorio)
-
 [build]
-  base = "client" 
-  command = "npm install && ng build --configuration production --base-href /"
-  
-  # CORRECCIÓN CLAVE: Debe ser relativa a la carpeta "client"
-  publish = "dist/client" 
+  base = "."                       # porque ya estamos dentro de client/
+  publish = "dist/client/browser"  # donde Angular realmente construye
+  command = "npm install && ng build --configuration production"
 
 [[redirects]]
   from = "/*"
